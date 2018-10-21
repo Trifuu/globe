@@ -141,63 +141,6 @@
 		body: JSON.stringify(data)
 	}).then(response => response.json());
 	
-	async function ruleaza(){
-
-		
-		async function getData() {
-			const data = await fetchPost('https://api.reliefweb.int/v1/reports?appname=apidoc', {
-				"limit": 20,
-				// "profile": "list",
-				"profile": "full",
-				// "preset": "analysis",
-				"query": {
-				    "value": "disaster"
-				},
-				// "fields": {
-				//     "include": [
-				//         "primary_country",
-				//         "status",
-				//         "theme",
-				//         "url",
-				//         "origin",
-				//         "body-html",
-				//         "body",
-				//         "file",
-				//         "disaster_type"
-				//     ]
-				// },
-				// "verbose": 1,
-				// "fields": {
-				//     "include": ["disaster.name"]
-				// },
-				// related_glide
-				"filter":
-				{
-				    "operator": "AND",
-				    "conditions": [{
-				        "field": "primary_country",
-				        "value": "France"
-				    }, {
-				        "field": "language.name",
-				        "value": "english"
-				    }]
-				}
-			});
-
-			console.log(data);
-			return data.data;
-		};
-
-		const getLocation = () => getData().then(data => data.map(element => element.fields.primary_country.location));
-
-		var location=await getLocation().then(locations=> console.log(locations));
-		setTimeout(function(){
-			console.log(location);
-		}, 6000);
-		
-	}
-	ruleaza();
-	
     if(!Detector.webgl){
       Detector.addGetWebGLMessage();
     } else {
